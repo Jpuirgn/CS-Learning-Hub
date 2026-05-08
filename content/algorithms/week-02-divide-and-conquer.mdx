@@ -1,0 +1,162 @@
+---
+title: "Week 2 — Divide and Conquer"
+course: "Data Structures and Algorithms"
+week: 2
+tags: ["divide-and-conquer", "merge-sort", "recurrence"]
+summary: "Introduces divide and conquer through recursive sum, recursive maximum, merge sort, and recurrence-based complexity analysis."
+---
+
+# Week 2 — Divide and Conquer
+
+## Learning Objectives
+
+- Understand the divide-and-conquer design technique.
+- Recognize recursive problem splitting into smaller instances.
+- Explain how merge sort works.
+- Solve simple recurrences arising from recursive algorithms.
+- Compare divide-and-conquer running times using asymptotic notation.
+
+## Core Concepts
+
+### Divide and conquer idea
+
+The lecture presents divide and conquer as a technique with two main stages:
+
+- Divide the original problem into smaller instances of the same problem.
+- Conquer the smaller instances, usually by solving them recursively.
+
+### Recursive examples
+
+Two simple examples are used early in the lecture:
+
+- `RecSum(A[1..n])`: split the array into two halves, recursively sum each half, then add the two answers.
+- `RecMax(A[1..n])`: split the array into two halves, recursively find the maximum in each half, then return the larger answer.
+
+These examples show the recursive structure before moving to sorting.
+
+### Merge sort
+
+Merge sort follows the same pattern:
+
+1. Divide the sequence into two halves.
+2. Recursively sort the two halves.
+3. Merge the two sorted halves.
+
+The lecture emphasizes that dividing is straightforward, and merging two sorted sequences of total length `n` can be done with at most `n - 1` comparisons.
+
+### Recurrence analysis
+
+The lecture models recursive running times with recurrences.
+
+- `RecSum` and `RecMax`: `T(n) = 2T(n/2) + O(n)`
+- Merge sort: `T(n) = 2T(n/2) + O(n)`
+- Binary search: `T(n) = T(n/2) + O(1)`
+
+The resulting growth rates discussed in the lecture are:
+
+- `RecSum`: `O(n log n)`
+- `RecMax`: `O(n log n)`
+- Merge sort: `O(n log n)`
+- Binary search: `O(log n)`
+
+## Key Algorithms
+
+### Recursive sum
+
+Split the array into two halves, recursively compute both sums, and combine them by addition.
+
+### Recursive maximum
+
+Split the array into two halves, recursively compute both maxima, and return the larger one.
+
+### Merge sort
+
+Merge sort repeatedly halves the input until single-element sequences remain, then merges them back into larger sorted sequences.
+
+### Binary search
+
+Binary search repeatedly compares against the middle element and continues only in the relevant half of the sorted sequence.
+
+## Pseudocode
+
+```text
+Algorithm RecSum(A[1..n])
+begin
+  if (n > 1) then
+  begin
+    copy A[1..n/2] to B[1..n/2]
+    copy A[n/2 + 1..n] to C[1..n/2]
+    sum1 = RecSum(B[1..n/2])
+    sum2 = RecSum(C[1..n/2])
+    return sum1 + sum2
+  end
+  else return A[1]
+end
+```
+
+```text
+Algorithm Mergesort(A[1..n])
+if n > 1 then
+  copy A[1..floor(n/2)] to B
+  copy A[floor(n/2)+1..n] to C
+  Mergesort(B)
+  Mergesort(C)
+  merge B and C back into A
+```
+
+```text
+Algorithm BinarySearch(A[1..n], x)
+if n = 0 then return "not found"
+compare x with the middle element
+if equal, return the position
+if x is smaller, search the left half
+if x is larger, search the right half
+```
+
+## Time Complexity
+
+- Recursive sum: `O(n log n)` in the lecture's copy-based formulation.
+- Recursive maximum: `O(n log n)` in the lecture's copy-based formulation.
+- Merge sort: `O(n log n)`.
+- Binary search: `O(log n)`.
+
+The lecture contrasts `T(n) = 2T(n/2) + O(n)` with `T(n) = T(n/2) + O(1)` to show why some recursive algorithms are much faster than others.
+
+## Worked Example
+
+The merge sort example starts from:
+
+`<51, 13, 10, 64, 34, 5, 32, 21>`
+
+The lecture shows the process:
+
+1. Divide into two halves.
+2. Continue halving until all sequences have one element.
+3. Merge single elements into sorted pairs.
+4. Merge sorted pairs into sorted groups of four.
+5. Merge the two sorted groups into the final sorted result:
+
+`<5, 10, 13, 21, 32, 34, 51, 64>`
+
+## Common Mistakes
+
+- Forgetting that merge sort requires both recursive sorting and merging.
+- Mixing up divide-and-conquer recurrence forms.
+- Assuming recursive splitting alone makes an algorithm fast without considering combine cost.
+- Using binary search on unsorted data.
+
+## Exam-Style Questions
+
+1. State the divide and conquer strategy in your own words.
+2. Explain why merge sort has recurrence `T(n) = 2T(n/2) + O(n)`.
+3. Why is binary search asymptotically faster than merge sort for searching?
+4. Trace one full merge step when combining two sorted halves.
+5. Compare `RecSum` and binary search in terms of recurrence and growth rate.
+
+## Quick Review Checklist
+
+- I can describe divide and conquer as divide plus conquer.
+- I can explain how merge sort splits and merges data.
+- I can write a simple recurrence for a recursive algorithm.
+- I know that merge sort runs in `O(n log n)`.
+- I know that binary search runs in `O(log n)`.

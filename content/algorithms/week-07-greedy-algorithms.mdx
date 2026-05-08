@@ -1,0 +1,145 @@
+---
+title: "Week 7 — Greedy Algorithms"
+course: "Data Structures and Algorithms"
+week: 7
+tags: ["greedy", "activity-selection", "huffman-coding"]
+summary: "Introduces greedy algorithms through activity selection and Huffman coding, and shows why greedy choice can fail for 0-1 knapsack."
+---
+
+# Week 7 — Greedy Algorithms
+
+## Learning Objectives
+
+- Understand the basic greedy strategy.
+- Apply greedy choice to the activity selection problem.
+- Understand the purpose of Huffman coding.
+- Recognize that greedy methods do not always produce optimal solutions.
+
+## Core Concepts
+
+### What is a greedy algorithm?
+
+The lecture describes greedy choice as:
+
+- at every step, make the best move available
+- keep going until finished
+
+Its main strengths are speed and simplicity, but the lecture also warns that the final solution may not be globally optimal.
+
+### Activity selection
+
+The activity selection problem asks for the maximum number of non-overlapping activities.
+
+The lecture's greedy rule is:
+
+- pick the available activity with the smallest finish time
+- repeat
+
+It also notes the running time:
+
+- `O(n)` if activities are already sorted by finish time
+- `O(n log n)` if sorting is required first
+
+### Why greedy can work
+
+The lecture explains greedy correctness through the idea that each choice should not rule out an optimal solution. It also introduces optimal substructure in the activity selection setting.
+
+### Huffman coding
+
+The lecture motivates Huffman coding by showing that fixed-length ASCII-style coding can be wasteful when some symbols occur much more frequently than others.
+
+Key ideas:
+
+- more frequent symbols should get shorter binary codes
+- codes should be prefix-free
+- prefix codes can be represented by a tree whose symbols appear at leaves
+
+### Greedy failure on 0-1 knapsack
+
+The lecture gives examples showing that greedy selection by value or by value-to-weight ratio does not always produce the best 0-1 knapsack solution.
+
+## Key Algorithms
+
+### Activity selection
+
+Repeatedly choose the compatible activity with the earliest finish time.
+
+### Huffman coding
+
+Build a prefix-code tree that assigns shorter codes to more frequent characters.
+
+### Knapsack as a non-example
+
+The lecture uses 0-1 knapsack to show that a locally attractive greedy choice can miss the global optimum.
+
+## Pseudocode
+
+```text
+Activity selection idea
+  choose the activity with the smallest finish time
+  discard incompatible activities
+  repeat on the remaining compatible activities
+```
+
+```text
+Huffman coding idea
+  represent symbols as leaves of a prefix-code tree
+  assign shorter codes to more frequent symbols
+  ensure no code is a prefix of another
+```
+
+```text
+Greedy knapsack counterexample idea
+  pick next item by largest value, or by largest value/weight
+  check capacity
+  continue
+  note: this may fail to give the optimal 0-1 solution
+```
+
+## Time Complexity
+
+- Activity selection: `O(n)` if already sorted by finish time; otherwise `O(n log n)` with sorting.
+- Greedy methods are typically fast because each step makes a local decision without exploring all combinations.
+- The lecture contrasts this with exhaustive subset checking in knapsack examples.
+
+## Worked Example
+
+For 0-1 knapsack, the lecture gives a counterexample with capacity `10` and items:
+
+- item 1: weight `7`, value `42`
+- item 2: weight `3`, value `12`
+- item 3: weight `4`, value `40`
+- item 4: weight `5`, value `25`
+
+Greedy by largest value chooses item `1` first, then item `2`, giving total value `54`.
+
+But the better solution is:
+
+- item `3` and item `4`
+- total weight `9`
+- total value `65`
+
+So the greedy choice is not optimal here.
+
+## Common Mistakes
+
+- Assuming every greedy algorithm is optimal.
+- Forgetting to justify why a greedy choice is safe.
+- Mixing up activity selection with knapsack.
+- Ignoring the prefix-free requirement in Huffman coding.
+
+## Exam-Style Questions
+
+1. What is the greedy rule for activity selection?
+2. Why does earliest finish time make sense in activity selection?
+3. What is a prefix code?
+4. Why can greedy choice fail for 0-1 knapsack?
+5. State one advantage and one limitation of greedy algorithms.
+
+## Quick Review Checklist
+
+- I can define a greedy algorithm.
+- I know the activity selection rule.
+- I understand the goal of Huffman coding.
+- I know that greedy choice must be justified, not assumed.
+- I can explain at least one knapsack counterexample from the lecture.

@@ -1,0 +1,7 @@
+.git
+.next
+.idea
+node_modules
+sources
+lecture_pdfs
+*.pdf

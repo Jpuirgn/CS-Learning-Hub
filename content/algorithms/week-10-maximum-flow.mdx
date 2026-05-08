@@ -1,0 +1,125 @@
+---
+title: "Week 10 — Maximum Flow"
+course: "Data Structures and Algorithms"
+week: 10
+tags: ["maximum-flow", "ford-fulkerson", "minimum-cut"]
+summary: "Introduces flow networks, augmenting paths, the Ford-Fulkerson method, and the max-flow min-cut connection."
+---
+
+# Week 10 — Maximum Flow
+
+## Learning Objectives
+
+- Understand the definition of a flow network.
+- Define feasible flow and flow value.
+- Understand augmenting paths and residual networks.
+- Apply the Ford-Fulkerson method.
+- Understand minimum cuts and the max-flow min-cut theorem.
+
+## Core Concepts
+
+### Flow networks
+
+The lecture defines a flow network as a directed graph with capacities on edges and two special vertices:
+
+- source `s`, which has only outgoing edges
+- sink `t`, which has only incoming edges
+
+### Feasible flow
+
+Each edge has both a capacity and a flow. A valid flow must satisfy:
+
+- flow on an edge does not exceed capacity
+- for every vertex except `s` and `t`, incoming flow equals outgoing flow
+
+### Flow value
+
+The value of a flow is:
+
+- the total flow leaving the source
+- equivalently, the total flow entering the sink
+
+### Augmenting paths and residual networks
+
+The lecture explains:
+
+- forward edges allow more flow if current flow is below capacity
+- backward edges allow flow to be reduced if current flow is positive
+
+These possibilities are captured in the residual network.
+
+### Maximum flow and cuts
+
+The lecture states:
+
+- a flow is maximum if and only if there is no augmenting path
+- the value of the maximum flow equals the capacity of the minimum cut
+
+## Key Algorithms
+
+### Ford-Fulkerson
+
+Start from zero flow, repeatedly find an augmenting path in the residual network, increase the flow along it, then update the residual network.
+
+### Edmonds-Karp
+
+The lecture notes that using BFS to find augmenting paths gives the Edmonds-Karp variant.
+
+## Pseudocode
+
+```text
+Ford-Fulkerson(G):
+  f <- all zero flow
+  Gf <- G
+  while t is reachable from s in Gf
+    find a path P from s to t in Gf
+    f <- increaseFlow(P, f)
+    update Gf
+  return f
+```
+
+```text
+increaseFlow(P, f):
+  let x be the smallest residual capacity on path P
+  for each edge (u, v) on P:
+    if (u, v) is a forward edge, increase f(u, v) by x
+    if (v, u) is a backward edge, decrease f(v, u) by x
+  return updated flow
+```
+
+## Time Complexity
+
+- Ford-Fulkerson: `O(Cm)` in the lecture, where `C` is the maximum flow value.
+- Edmonds-Karp: `O(nm^2)` when BFS is used to choose augmenting paths.
+
+## Worked Example
+
+The lecture shows that a flow of value `3` can be increased to `4` by finding an augmenting path and pushing additional flow through the residual network.
+
+It also gives a network where the maximum flow has value `11`, then uses a cut of capacity `11` to illustrate the max-flow min-cut theorem:
+
+- maximum flow value = `11`
+- minimum cut capacity = `11`
+
+## Common Mistakes
+
+- Forgetting the flow-conservation rule at intermediate vertices.
+- Treating flow/capacity notation as division rather than two separate quantities.
+- Ignoring backward edges in the residual network.
+- Confusing a maximal-looking flow with a truly maximum flow.
+
+## Exam-Style Questions
+
+1. Define a flow network.
+2. What conditions must a feasible flow satisfy?
+3. What is an augmenting path?
+4. Outline the Ford-Fulkerson method.
+5. State the max-flow min-cut theorem.
+
+## Quick Review Checklist
+
+- I can define source, sink, capacity, and flow.
+- I know how to compute the value of a flow.
+- I understand why residual networks matter.
+- I know the basic Ford-Fulkerson loop.
+- I know the connection between maximum flow and minimum cut.

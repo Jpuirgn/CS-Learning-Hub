@@ -1,0 +1,127 @@
+---
+title: "Week 8 — Graph Theory"
+course: "Data Structures and Algorithms"
+week: 8
+tags: ["graph", "bfs", "dfs"]
+summary: "Introduces graph representations, Euler circuits, and the traversal algorithms BFS and DFS."
+---
+
+# Week 8 — Graph Theory
+
+## Learning Objectives
+
+- Distinguish undirected graphs from directed graphs.
+- Represent graphs using matrices and lists.
+- Determine when an undirected graph has an Euler circuit.
+- Apply BFS and DFS to graph traversal.
+
+## Core Concepts
+
+### Graph definitions
+
+The lecture defines:
+
+- an undirected graph `G = (V, E)` where each edge is an unordered pair of vertices
+- a directed graph `G = (V, E)` where each edge is an ordered pair of vertices
+
+It also introduces adjacency, degree, in-degree, and out-degree.
+
+### Graph representations
+
+The lecture covers:
+
+- adjacency matrix
+- adjacency list
+- incidence matrix
+- incidence list
+
+Adjacency-based representations track neighboring vertices, while incidence-based representations track which vertices belong to each edge.
+
+### Euler circuit
+
+An Euler circuit is a circuit that visits every edge exactly once.
+
+For connected undirected graphs, the lecture gives the condition:
+
+- a connected graph has an Euler circuit if and only if every vertex has even degree
+
+It contrasts this with Hamiltonian circuits, which are much harder to determine.
+
+### Breadth-first search
+
+BFS explores all vertices at distance `k` from the source before any vertex at distance `k + 1`.
+
+### Depth-first search
+
+DFS explores as deeply as possible before backtracking.
+
+## Key Algorithms
+
+### BFS
+
+Use a queue-like list structure, mark discovered vertices, and process neighbors level by level.
+
+### DFS
+
+Explore from the most recently discovered vertex, continuing until there is nowhere deeper to go, then backtrack.
+
+## Pseudocode
+
+```text
+BFS
+  unmark all vertices
+  choose starting vertex s
+  mark s and insert s into tail of list L
+  while L is nonempty do
+  begin
+    remove a vertex v from front of L
+    visit v
+    for each unmarked neighbor w of v do
+      mark w and insert w into tail of list L
+  end
+```
+
+```text
+DFS(vertex v)
+  mark v
+  visit v
+  for each unmarked neighbor w of v do
+    DFS(w)
+```
+
+## Time Complexity
+
+The lecture's summary later compares BFS on unweighted shortest-path problems with other graph algorithms and gives BFS as `O(n + m)`.
+
+Both BFS and DFS traverse vertices and edges systematically and are used as fundamental graph-search procedures.
+
+## Worked Example
+
+For one BFS exercise starting from vertex `a`, the lecture gives the exploration order:
+
+`a, d, e, f, b, c`
+
+The key point is that BFS visits by increasing distance from the source, while DFS would instead keep moving deeper before backtracking.
+
+## Common Mistakes
+
+- Confusing undirected and directed edge definitions.
+- Mixing adjacency matrices with incidence matrices.
+- Assuming connectedness alone guarantees an Euler circuit.
+- Confusing BFS level-order exploration with DFS deep exploration.
+
+## Exam-Style Questions
+
+1. Define undirected and directed graphs.
+2. Compare adjacency-list and adjacency-matrix representations.
+3. State the condition for an Euler circuit in a connected undirected graph.
+4. Explain how BFS differs from DFS.
+5. Why is an Euler circuit different from a Hamiltonian circuit?
+
+## Quick Review Checklist
+
+- I can define a graph using vertices and edges.
+- I know the main graph representations from the lecture.
+- I know the Euler-circuit condition.
+- I can explain BFS and DFS at a high level.
+- I can tell when BFS is more naturally level-based than DFS.

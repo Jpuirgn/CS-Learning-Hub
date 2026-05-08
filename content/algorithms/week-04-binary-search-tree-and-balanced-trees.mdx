@@ -1,0 +1,134 @@
+---
+title: "Week 4 — Binary Search Trees and Balanced Trees"
+course: "Data Structures and Algorithms"
+week: 4
+tags: ["bst", "avl-tree", "tree-rotation"]
+summary: "Covers binary search trees, tree traversals, balance issues, and self-balancing trees such as AVL trees."
+---
+
+# Week 4 — Binary Search Trees and Balanced Trees
+
+## Learning Objectives
+
+- Define the binary search tree property.
+- Understand inorder, preorder, and postorder traversal.
+- Explain why unbalanced BSTs can become inefficient.
+- Understand the idea of balanced trees.
+- Recognize how AVL rotations restore balance.
+
+## Core Concepts
+
+### Binary search tree
+
+A binary search tree is a binary tree where each node has a key and:
+
+- the left subtree contains keys less than or equal to the parent key
+- the right subtree contains keys greater than or equal to the parent key
+
+The lecture notes average-case `O(log n)` performance for insert, lookup, and remove.
+
+### Tree traversals
+
+The lecture highlights three standard traversals:
+
+- Inorder
+- Preorder
+- Postorder
+
+Inorder traversal is especially important for BSTs because it prints the keys in sorted order.
+
+### Why balance matters
+
+The lecture asks what happens if we insert elements in ascending order. This creates an unbalanced BST that behaves more like a linked list than a balanced search tree.
+
+### AVL trees
+
+AVL trees are height-balanced binary search trees. The balance factor of a node is:
+
+`height(left subtree) - height(right subtree)`
+
+The lecture states that the balance factor should always be one of:
+
+- `-1`
+- `0`
+- `+1`
+
+### Rotations
+
+Balance is restored using rotations:
+
+- single right rotation
+- single left rotation
+- left-right rotation
+- right-left rotation
+
+## Key Algorithms
+
+### Inorder traversal
+
+Recursively traverse left, visit the node, then traverse right.
+
+### AVL rebalancing
+
+When insertion causes imbalance, apply the appropriate rotation based on whether the heavy path is left-left, right-right, left-right, or right-left.
+
+## Pseudocode
+
+```text
+inorderTraversal(x)
+  if x != NULL
+    inorderTraversal(x.left)
+    print(x.key)
+    inorderTraversal(x.right)
+```
+
+```text
+AVL rebalancing idea
+  if balance factor becomes +2 or -2
+    use one of:
+      right rotation
+      left rotation
+      left-right rotation
+      right-left rotation
+  restore balance factor to -1, 0, or +1
+```
+
+## Time Complexity
+
+- BST search, insert, and remove: `O(log n)` on average according to the lecture.
+- Traversals visit each node once, so they are linear in the number of nodes.
+- Balanced trees aim to preserve logarithmic-height behavior for search-related operations.
+
+## Worked Example
+
+The lecture uses inorder traversal to show how BST keys are visited in sorted order. It also shows simple AVL rotation cases:
+
+1. Insert into the left subtree of the left child: use a right rotation.
+2. Insert into the right subtree of the right child: use a left rotation.
+3. Insert into a left-right pattern: perform left rotation, then right rotation.
+4. Insert into a right-left pattern: perform right rotation, then left rotation.
+
+These cases show how local restructuring can restore global balance.
+
+## Common Mistakes
+
+- Treating a BST as balanced automatically.
+- Forgetting that inorder traversal of a BST gives sorted output.
+- Confusing preorder and postorder with inorder.
+- Applying the wrong rotation when an AVL imbalance occurs.
+
+## Exam-Style Questions
+
+1. State the BST property.
+2. Why does inorder traversal print BST keys in sorted order?
+3. What happens to a BST if keys are inserted in sorted order?
+4. Define the AVL balance factor.
+5. Distinguish between single and double rotations.
+
+## Quick Review Checklist
+
+- I can define a BST correctly.
+- I know the three standard traversals.
+- I know why unbalanced BSTs are a problem.
+- I understand the AVL balance factor.
+- I can identify when single or double rotations are needed.

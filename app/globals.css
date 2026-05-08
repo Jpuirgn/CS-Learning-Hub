@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f6f2;
+  --foreground: #171717;
+  --muted: #66604f;
+  --line: #d9d2c3;
+  --panel: #fffdfa;
+  --accent: #1f4b99;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: radial-gradient(circle at top, #fcfbf8 0%, var(--background) 60%);
+  color: var(--foreground);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+a {
+  color: inherit;
+}
+
+.prose-academic h1,
+.prose-academic h2,
+.prose-academic h3,
+.prose-academic h4 {
+  color: #111111;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.prose-academic h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose-academic h2 {
+  font-size: 1.4rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.35rem;
+}
+
+.prose-academic h3 {
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-academic p,
+.prose-academic li {
+  color: #2f2b23;
+  line-height: 1.8;
+}
+
+.prose-academic ul,
+.prose-academic ol {
+  padding-left: 1.2rem;
+  margin: 0.8rem 0;
+}
+
+.prose-academic code {
+  background: #f2ede2;
+  border-radius: 0.25rem;
+  padding: 0.15rem 0.35rem;
+  font-size: 0.92em;
+}
+
+.prose-academic pre {
+  background: #141414;
+  color: #f8f8f2;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.prose-academic pre code {
+  background: transparent;
+  padding: 0;
+}

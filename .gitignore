@@ -1,0 +1,12 @@
+node_modules
+.next
+dist
+out
+.idea
+.vercel
+.DS_Store
+.env
+.env.*
+sources/
+lecture_pdfs/
+*.pdf

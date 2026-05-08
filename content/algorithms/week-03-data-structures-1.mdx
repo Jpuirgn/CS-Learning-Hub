@@ -1,0 +1,155 @@
+---
+title: "Week 3 — Data Structures I"
+course: "Data Structures and Algorithms"
+week: 3
+tags: ["stack", "queue", "heap"]
+summary: "Surveys core linear and tree-based data structures, then introduces heaps, heap construction, and heapsort."
+---
+
+# Week 3 — Data Structures I
+
+## Learning Objectives
+
+- Recognize the role of data structures in efficient data organization.
+- Understand stack and queue behavior and operations.
+- Compare arrays with linked lists.
+- Understand trees, binary trees, and heaps.
+- Explain heap construction and heapsort.
+
+## Core Concepts
+
+### What is a data structure?
+
+The lecture defines a data structure as a way of organizing and storing data so that it can be accessed and used efficiently.
+
+### Linear structures
+
+The main linear structures covered are:
+
+- Stack: Last In First Out (LIFO)
+- Queue: First In First Out (FIFO)
+- Array
+- Linked list
+
+For stacks, the basic operations are push, pop, peek, and `isEmpty`.
+
+For queues, the lecture discusses enqueue, dequeue, peek, and `isEmpty`, and introduces `FRONT` and `REAR` pointers.
+
+### Queue variants
+
+The lecture briefly distinguishes:
+
+- Simple queue
+- Circular queue
+- Priority queue
+- Double-ended queue
+
+### Linked lists and arrays
+
+Linked lists store data using nodes connected by pointers, while arrays store elements in contiguous memory locations.
+
+The lecture highlights the trade-off:
+
+- Arrays allow easy indexed access.
+- Linked lists support easier insertion and deletion once the position is known.
+
+### Trees and heaps
+
+The lecture then moves to non-linear structures:
+
+- Tree
+- Binary tree
+- Heap
+
+A max heap satisfies the max-heap property: each node's key is greater than or equal to the keys of its children.
+
+## Key Algorithms
+
+### MAX-HEAPIFY
+
+`MAX-HEAPIFY` restores the max-heap property at a node by comparing it with its children, swapping with the larger child when needed, and recursing downward.
+
+### BUILD-MAX-HEAP
+
+`BUILD-MAX-HEAP` turns an array into a max heap by calling `MAX-HEAPIFY` from `n/2` down to `1`.
+
+### Heapsort
+
+Heapsort first builds a max heap, then repeatedly swaps the root with the last element, shrinks the heap, and heapifies again.
+
+## Pseudocode
+
+```text
+Max_Heapify(A, i):
+  l = left(i)
+  r = right(i)
+  if (l <= heap-size(A) and A[l] > A[i])
+    largest = l
+  else
+    largest = i
+  if (r <= heap-size(A) and A[r] > A[largest])
+    largest = r
+  if largest != i
+    exchange A[i] and A[largest]
+    Max_Heapify(A, largest)
+```
+
+```text
+Build_Max_Heap(A):
+  for i = n/2 downto 1
+    do Max_Heapify(A, i)
+```
+
+```text
+Heapsort(A):
+  Build_Max_Heap(A)
+  for i = A.length downto 2
+    exchange A[1] with A[i]
+    A.heap-size = A.heap-size - 1
+    Max_Heapify(A, 1)
+```
+
+## Time Complexity
+
+- Stack push/pop/peek: treated as constant-time basic operations.
+- Queue enqueue/dequeue/peek: treated as constant-time basic operations.
+- Array access by index: fast direct access due to contiguous storage.
+- `MAX-HEAPIFY`: `O(log n)`.
+- `BUILD-MAX-HEAP`: `O(n)`.
+- Heapsort: the lecture notes that heapify costs `O(log n)` and the root is deleted iteratively, giving overall `O(n log n)`.
+
+## Worked Example
+
+The heapsort part of the lecture follows this pattern:
+
+1. Build a max heap from the array.
+2. The maximum element is at the root.
+3. Swap the root with the last element.
+4. Reduce the heap size.
+5. Call `MAX-HEAPIFY` on the root.
+6. Repeat until the array becomes sorted.
+
+This works because each deletion places the current maximum into its final sorted position.
+
+## Common Mistakes
+
+- Confusing stack LIFO behavior with queue FIFO behavior.
+- Assuming linked lists support random access like arrays.
+- Forgetting that heaps are complete binary trees with an ordering property, not fully sorted trees.
+- Thinking `BUILD-MAX-HEAP` is `O(n log n)` instead of the tighter `O(n)` bound shown in the lecture.
+
+## Exam-Style Questions
+
+1. Compare stack and queue behavior.
+2. Give two advantages of arrays and two advantages of linked lists.
+3. State the max-heap property.
+4. Explain the role of `MAX-HEAPIFY` in heapsort.
+5. Why does `BUILD-MAX-HEAP` start from `n/2`?
+
+## Quick Review Checklist
+
+- I know the core operations of stacks and queues.
+- I can compare arrays and linked lists.
+- I know what a heap is.
+- I can explain `MAX-HEAPIFY`.
+- I know that heapsort uses heap construction plus repeated root deletion.

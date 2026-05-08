@@ -1,0 +1,146 @@
+---
+title: "Week 5 — Hash Table"
+course: "Data Structures and Algorithms"
+week: 5
+tags: ["hash-table", "collision", "probing"]
+summary: "Introduces hash tables, hash functions, collisions, and collision-resolution methods such as chaining and open addressing."
+---
+
+# Week 5 — Hash Table
+
+## Learning Objectives
+
+- Understand how a hash table stores key-value pairs.
+- Define a hash function and its role.
+- Explain why hashing gives fast average-case access.
+- Understand collisions and common resolution strategies.
+- Compare chaining with open addressing methods.
+
+## Core Concepts
+
+### Hash table basics
+
+A hash table uses an array `T` of capacity `m` together with a hash function `h(k)` that maps a key to an index between `0` and `m - 1`.
+
+The lecture states average-case `O(1)` performance for insertion, lookup, and deletion.
+
+### Hash functions
+
+A hash function:
+
+- takes a key as input
+- returns an array index
+- must always return the same integer for the same key
+
+Two methods shown in the lecture are:
+
+- Division method: `h(k) = k mod m`
+- Multiplication method: `h(k) = floor(m(kA mod 1))`
+
+The lecture notes that choosing `m` as a prime often helps reduce collisions.
+
+### Why hashing is useful
+
+The lecture compares:
+
+- linear search: `O(n)`
+- binary search on sorted data: `O(log n)`
+- hashing: `O(1)` on average
+
+### Collisions
+
+A collision happens when different keys map to the same index.
+
+The lecture introduces two broad solutions:
+
+- Chaining
+- Open addressing
+
+### Open addressing variants
+
+The lecture covers:
+
+- Linear probing
+- Quadratic probing
+- Double hashing
+
+Linear probing is simple but can cause primary clustering. Quadratic probing reduces primary clustering but may still cause secondary clustering. Double hashing uses a second hash function to vary the step size and avoids clustering more effectively.
+
+## Key Algorithms
+
+### Chaining
+
+Store all colliding keys at the same table index using a linked list.
+
+### Linear probing
+
+When a slot is occupied, check the next candidate slot using:
+
+`h(k, i) = (h1(k) + i) mod m`
+
+### Double hashing
+
+Use a second hash function to determine the jump distance:
+
+`h(k, i) = (h1(k) + i * h2(k)) mod m`
+
+## Pseudocode
+
+```text
+Division method
+h(k) = k mod m
+```
+
+```text
+Linear probing
+h(k, i) = (h1(k) + i) mod m
+where i = 0, 1, 2, ...
+```
+
+```text
+Double hashing
+h(k, i) = (h1(k) + i * h2(k)) mod m
+where i = 0, 1, 2, ...
+```
+
+## Time Complexity
+
+- Hash table insertion, lookup, and deletion: `O(1)` on average according to the lecture.
+- Poor hash functions or many collisions degrade performance.
+- Linear probing can become slower because of clustering.
+
+## Worked Example
+
+The lecture gives a simple collision example using:
+
+`hash(key) = key % 5`
+
+For keys `10` and `15`:
+
+- `hash(10) = 0`
+- `hash(15) = 0`
+
+Both keys map to index `0`, so a collision occurs. This motivates collision handling through chaining or probing.
+
+## Common Mistakes
+
+- Assuming a hash function always produces unique indices.
+- Ignoring collisions when designing or implementing a hash table.
+- Using a poor hash function that creates clustering.
+- Thinking `O(1)` means guaranteed constant time in every case.
+
+## Exam-Style Questions
+
+1. Define a hash table and a hash function.
+2. Why can different keys produce the same hash value?
+3. Compare chaining and open addressing.
+4. What is primary clustering?
+5. Why is double hashing often better than linear probing?
+
+## Quick Review Checklist
+
+- I know how keys are mapped to array positions.
+- I can state the division and multiplication methods.
+- I know what a collision is.
+- I can explain chaining, linear probing, quadratic probing, and double hashing.
+- I know why a good hash function matters.

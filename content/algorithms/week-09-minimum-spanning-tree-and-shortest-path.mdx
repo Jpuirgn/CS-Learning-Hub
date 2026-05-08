@@ -1,0 +1,165 @@
+---
+title: "Week 9 — Minimum Spanning Tree and Shortest Path"
+course: "Data Structures and Algorithms"
+week: 9
+tags: ["mst", "dijkstra", "bellman-ford"]
+summary: "Covers minimum spanning trees using Kruskal and Prim, then single-source shortest paths using Dijkstra and Bellman-Ford."
+---
+
+# Week 9 — Minimum Spanning Tree and Shortest Path
+
+## Learning Objectives
+
+- Understand the definition of a minimum spanning tree.
+- Apply Kruskal's and Prim's algorithms to MST problems.
+- Understand the single-source shortest path problem.
+- Apply Dijkstra's and Bellman-Ford algorithms.
+
+## Core Concepts
+
+### Minimum spanning tree
+
+For an undirected connected graph:
+
+- a spanning tree connects all vertices with no cycles
+- a minimum spanning tree has minimum total edge weight
+
+### Kruskal's idea
+
+The lecture describes Kruskal's method as:
+
+- sort edges from smallest to largest weight
+- add the next lightest edge as long as no cycle forms
+
+This grows a forest until one tree remains.
+
+### Prim's idea
+
+Prim's algorithm grows a single tree:
+
+- start from one vertex
+- repeatedly add the lightest edge that expands the current tree
+
+The efficient version keeps a key value and parent for each vertex.
+
+### Shortest paths
+
+The lecture defines the shortest path cost between vertices as the minimum total weight along a path.
+
+### Dijkstra vs Bellman-Ford
+
+- Dijkstra works for weighted graphs without negative edge weights.
+- Bellman-Ford can handle negative edge weights but is slower.
+
+## Key Algorithms
+
+### Kruskal's algorithm
+
+Grow a forest by repeatedly choosing the smallest safe edge.
+
+### Prim's algorithm
+
+Grow one tree by repeatedly extracting the unreached vertex with smallest key and relaxing its neighbors.
+
+### Dijkstra's algorithm
+
+Maintain best-known distances from the source and repeatedly finalize the smallest tentative one.
+
+### Bellman-Ford algorithm
+
+Relax every edge repeatedly for `n - 1` rounds.
+
+## Pseudocode
+
+```text
+slowPrim(G = (V,E), starting vertex s):
+  MST = {}
+  verticesVisited = {s}
+  while |verticesVisited| < |V|:
+    find the lightest edge (x, v) in E so that
+      x is in verticesVisited
+      v is not in verticesVisited
+    add (x, v) to MST
+    add v to verticesVisited
+  return MST
+```
+
+```text
+Prim(G = (V,E), starting vertex s):
+  key(v) = infinity for all v in V
+  key(s) = 0
+  p(v) = NULL for all v in V
+  while vertices remain in Q:
+    u = ExtractMin(Q)
+    for each neighbor v of u:
+      if v in Q and w(u, v) < key(v):
+        key(v) = w(u, v)
+        p(v) = u
+  return MST edges from parent pointers
+```
+
+```text
+Dijkstra(G = (V,E), starting vertex s):
+  key(v) = infinity for all v in V
+  key(s) = 0
+  p(v) = NULL for all v in V
+  while Q is not empty:
+    u = ExtractMin(Q)
+    for each neighbor v of u:
+      if v in Q and key(v) > key(u) + w(u, v):
+        key(v) = key(u) + w(u, v)
+        p(v) = u
+  return shortest-path tree
+```
+
+```text
+Bellman-Ford(G = (V,E), starting vertex s):
+  key(v) = infinity for all v in V
+  key(s) = 0
+  p(v) = NULL for all v in V
+  for i = 1 to n - 1:
+    for each edge (u, v) in E:
+      if key(v) > key(u) + w(u, v):
+        key(v) = key(u) + w(u, v)
+        p(v) = u
+  return key, p
+```
+
+## Time Complexity
+
+- Kruskal with a disjoint-set structure: `O(m log n)` according to the lecture summary.
+- Prim with a binary min-heap: `O(m log n)`.
+- Dijkstra with a binary min-heap: `O(m log n)`.
+- Bellman-Ford: `O(nm)`.
+- BFS on unweighted graphs appears in the lecture summary as `O(n + m)`.
+
+## Worked Example
+
+The MST section walks through edge selection in ascending order. The lecture also gives a Prim exercise whose edge-selection order is:
+
+`(a,b), (b,f), (c,f), (f,e), (e,d)`
+
+For shortest paths, the Bellman-Ford example shows repeated relaxation updating distance estimates until they stabilize, illustrating why the algorithm can handle negative edge weights.
+
+## Common Mistakes
+
+- Confusing MST problems with shortest-path problems.
+- Forgetting that Kruskal must avoid cycles.
+- Applying Dijkstra when negative edge weights exist.
+- Thinking Bellman-Ford is just a slower Dijkstra rather than a different relaxation strategy.
+
+## Exam-Style Questions
+
+1. Define a minimum spanning tree.
+2. Compare how Kruskal and Prim grow a solution.
+3. Why does Dijkstra require non-negative edge weights?
+4. What does Bellman-Ford repeatedly relax?
+5. Compare the running times of Prim, Dijkstra, and Bellman-Ford from the lecture.
+
+## Quick Review Checklist
+
+- I can define MST and shortest-path problems separately.
+- I know the edge-selection idea in Kruskal.
+- I know the tree-growth idea in Prim.
+- I know when Dijkstra is safe to use.
+- I know Bellman-Ford handles negative weights.

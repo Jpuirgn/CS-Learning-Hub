@@ -1,0 +1,132 @@
+---
+title: "Week 1 — Computational Complexity"
+course: "Data Structures and Algorithms"
+week: 1
+tags: ["complexity", "insertion-sort", "asymptotic-analysis"]
+summary: "Introduces what algorithms are, uses insertion sort as a running example, and develops basic time, space, and asymptotic complexity analysis."
+---
+
+# Week 1 — Computational Complexity
+
+## Learning Objectives
+
+- Define what an algorithm is and distinguish it from a program.
+- Recognize common classes of algorithmic problems such as sorting and searching.
+- Explain how insertion sort works.
+- Understand correctness ideas such as loop invariants.
+- Describe worst-case, average-case, and space complexity.
+- Use asymptotic notation to describe growth rates.
+
+## Core Concepts
+
+### What is an algorithm?
+
+The lecture defines an algorithm as a sequence of computational steps that transforms input into output. It can also be viewed as a tool for solving a well-specified computational problem.
+
+### Algorithm vs. program
+
+An algorithm is the design idea for solving a problem. A program is the concrete implementation of that idea in a programming language and then tested on real hardware and an operating system.
+
+### Example problem: sorting
+
+Sorting takes a sequence of numbers as input and returns the same values in nondecreasing order.
+
+Example from the lecture:
+
+- Input: `<8,2,4,9,3,6>`
+- Output: `<2,3,4,6,8,9>`
+
+### Correctness with loop invariants
+
+The lecture uses insertion sort to introduce loop invariants:
+
+- Initialization: the invariant is true before the first iteration.
+- Maintenance: if it is true before one iteration, it remains true before the next.
+- Termination: when the loop ends, the invariant helps prove correctness.
+
+For insertion sort, the key invariant is that the prefix `A[1..j-1]` is already sorted before each iteration.
+
+### Why analyze complexity?
+
+The lecture emphasizes that computation time and memory space are limited resources. Algorithm analysis helps us predict the resources an algorithm needs and compare different approaches.
+
+### Asymptotic growth
+
+For large inputs, we focus on the dominant term of a running-time expression. This is why a quadratic expression such as `an^2 + bn + c` is summarized as `O(n^2)`.
+
+## Key Algorithms
+
+### Insertion Sort
+
+Insertion sort builds a sorted prefix from left to right. At each step, it takes the next element and inserts it into the correct position inside the part that is already sorted.
+
+This is the main worked algorithm in the lecture and is used to discuss:
+
+- correctness
+- best-case and worst-case running time
+- in-place space usage
+- asymptotic notation
+
+## Pseudocode
+
+```text
+INSERTION-SORT(A)
+1  for j = 2 to A.length
+2      key = A[j]
+3      // Insert A[j] into the sorted sequence A[1..j-1].
+4      i = j - 1
+5      while i > 0 and A[i] > key
+6          A[i + 1] = A[i]
+7          i = i - 1
+8      A[i + 1] = key
+```
+
+## Time Complexity
+
+- Best case: the array is already sorted, so insertion sort runs in linear time.
+- Worst case: the array is reverse sorted, so insertion sort runs in quadratic time.
+- Average case: the lecture notes that average-case performance is often roughly as bad as the worst case.
+- Standard summary for insertion sort:
+  - worst-case time complexity: `O(n^2)`
+  - best-case running time: `Theta(n)`
+  - auxiliary space complexity: `O(1)`
+
+The lecture also gives an intuitive scaling rule:
+
+- doubling the input size makes an `O(n^2)` algorithm take roughly `4` times as long
+- tripling the input size makes it take roughly `9` times as long
+
+## Worked Example
+
+For the input `<8,2,4,9,3,6>`, insertion sort gradually grows a sorted left prefix:
+
+1. Start with `8` as the sorted prefix.
+2. Insert `2` before `8` to get `<2,8,4,9,3,6>`.
+3. Insert `4` between `2` and `8` to get `<2,4,8,9,3,6>`.
+4. Keep `9` in place because it is already larger than the sorted prefix.
+5. Insert `3` into the correct place to get `<2,3,4,8,9,6>`.
+6. Insert `6` to get the final sorted result `<2,3,4,6,8,9>`.
+
+## Common Mistakes
+
+- Treating a few checked examples as a proof instead of using a proper argument such as induction or a loop invariant.
+- Forgetting that Big-O describes an asymptotic upper bound rather than an exact running time formula.
+- Ignoring the input pattern and assuming insertion sort behaves the same on sorted and reverse-sorted arrays.
+- Forgetting that insertion sort is in-place, so its auxiliary space is constant.
+
+## Exam-Style Questions
+
+1. Define an algorithm and explain how it differs from a program.
+2. State the loop invariant used to justify insertion sort.
+3. Explain why insertion sort has `O(n^2)` worst-case time complexity.
+4. Show that `2n^3 + n^2` is `O(n^3)`.
+5. Explain the difference between `O`, `Omega`, and `Theta` notation.
+
+## Quick Review Checklist
+
+- I can define an algorithm clearly.
+- I can explain the sorting problem and the idea of insertion sort.
+- I can state the insertion sort loop invariant.
+- I know the best-case, worst-case, and auxiliary space complexity of insertion sort.
+- I understand why dominant growth matters more than lower-order terms for large `n`.
+- I can interpret `O`, `Omega`, and `Theta` at a basic level.
